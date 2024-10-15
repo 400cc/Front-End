@@ -4,7 +4,6 @@ import Loading from '@/components/Loading';
 import React from 'react';
 import { ClusterNodeType } from '@/pages/home/_types/clusterData.type';
 import { useFetchClusterDetail } from '../../_hooks/useFetchClusterDetail';
-import { debounce } from 'lodash';
 import ApexCharts from 'apexcharts';
 
 interface ClusteringChartProps {

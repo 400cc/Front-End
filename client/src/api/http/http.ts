@@ -16,7 +16,8 @@ export class Http implements ICommunication {
 	constructor() {
 		const axiosConfig = {
 			// baseURL: import.meta.env.VITE_BASE_URL,
-			baseURL: 'http://localhost:8080',
+			// baseURL: 'http://localhost:8080',
+			baseURL: 'https://api.400cc.araas.ai',
 			withCredentials: false,
 		};
 		this.httpClient = axios.create(axiosConfig);
