@@ -15,6 +15,7 @@ export const useImageSearch = () => {
 			formData.set('mallTypeId', mallType);
 			if (categoryList.length === 0) {
 				formData.set('categoryList', '');
+				formData.set('categoryNameList', '');
 			} else {
 				formData.set('categoryList', JSON.stringify(categoryList.map((item) => item.categoryId)));
 				formData.set('categoryNameList', JSON.stringify(categoryList.map((item) => item.name)));

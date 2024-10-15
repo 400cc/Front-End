@@ -19,10 +19,9 @@ export const useFetchPriceTrend = () => {
 	const { data, isLoading, isError } = useQuery({
 		queryKey: ['priceTrend', fetchQuery().toString()],
 		queryFn: () => {
-			console.log(`Fetching price trend for mallTypeId: ${mallTypeId}`);
 			return httpInterface.getPriceTrend(fetchQuery());
 		},
-		// enabled: !!mallTypeId,
+		enabled: !!mallTypeId,
 	});
 
 	return { data, isLoading, isError };

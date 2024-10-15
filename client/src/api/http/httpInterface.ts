@@ -61,7 +61,6 @@ export class HttpInterface {
 	}
 
 	async getPriceTrend(params: any) {
-		// console.log(`API call to /home/price with mallTypeId: ${mallTypeId}`);
 		return this.apiClient.get(`/home/price?${params}`);
 	}
 
