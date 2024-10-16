@@ -18,9 +18,12 @@ export const useClustering = () => {
 
 	const handleSubmit = () => {
 		// 검색 파라미터가 모두 선택되었는지 확인
+		const offsetInt = parseInt(offset);
 		if (!mallType || !categoryList.length) {
-			alert('Mall 타입과 카테고리를 선택해주세요.');
-			return;
+			return alert('Mall 타입과 카테고리를 선택해주세요.');
+		}
+		if (offsetInt < 3 || offsetInt % 2 !== 0) {
+			return alert('군집의 수는 3 이상의 홀수로 입력해주세요.');
 		}
 
 		// 검색 API 호출 (여기서는 useFetchClustering 내부에서 이미 data를 가져오고 있으니 단순 상태 변경으로 충분)

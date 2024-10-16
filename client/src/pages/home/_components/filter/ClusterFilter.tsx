@@ -71,16 +71,19 @@ export default function ClusterFilter({
 				{categoryOptions.map((cat) => (
 					<li key={cat.categoryId}>
 						<div className="flex items-center">
-							<input
-								type="checkbox"
-								checked={
-									cat.categoryId === categoryList.find((category) => category.categoryId === cat.categoryId)?.categoryId
-								}
-								onChange={() => {
-									handleCategoryChange(cat.categoryId, cat.name);
-									setActiveFilter(null);
-								}}
-							/>
+							{cat.children.length === 0 && (
+								<input
+									type="checkbox"
+									checked={
+										cat.categoryId ===
+										categoryList.find((category) => category.categoryId === cat.categoryId)?.categoryId
+									}
+									onChange={() => {
+										handleCategoryChange(cat.categoryId, cat.name);
+										setActiveFilter(null);
+									}}
+								/>
+							)}
 							<span className="ml-2 cursor-pointer" onClick={() => toggleCategory(cat.categoryId)}>
 								{cat.name}
 							</span>
@@ -185,6 +188,7 @@ export default function ClusterFilter({
 				<label className="block mb-2 text-md font-medium text-gray-700">클러스터링 군집 수</label>
 				<input
 					type="number"
+					min="1"
 					placeholder="분류할 군집의 개수를 선택해주세요."
 					className="mt-1 block pl-3 py-2 text-base bg-gray-100 border-gray-300  focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-xl"
 					value={offset}
