@@ -22,7 +22,7 @@ export const useClustering = () => {
 		if (!mallType || !categoryList.length) {
 			return alert('Mall 타입과 카테고리를 선택해주세요.');
 		}
-		if (offsetInt < 3 || offsetInt % 2 !== 0) {
+		if (offsetInt < 3 || offsetInt % 2 === 0) {
 			return alert('군집의 수는 3 이상의 홀수로 입력해주세요.');
 		}
 
