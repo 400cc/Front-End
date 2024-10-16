@@ -7,7 +7,7 @@ interface FilterButtonProps {
 	filterKey: string;
 	activeFilter: string | null;
 	toggleDropdown: (filterName: string) => void;
-	applyFilter: (filterKey: string, value: string) => void;
+	applyFilter: (filterKey: string, value: any) => void;
 	options: any[];
 	isMultiSelect: boolean;
 	selectedFilters: { [key: string]: string | CategoryType[] | null };
@@ -40,7 +40,7 @@ const FilterButton: React.FC<FilterButtonProps> = ({
 
 	const handleCategoryChange = (category: any) => {
 		const idValue = category.categoryId.toString();
-		applyFilter(filterKey, idValue);
+		applyFilter(filterKey, { categoryId: idValue, name: category.name });
 	};
 
 	const renderCategories = (categories: any[]) => {

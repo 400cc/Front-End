@@ -26,7 +26,7 @@ export default function HomeFilter() {
 		startDate: null,
 		endDate: null,
 	});
-	const [categoryOptions, setCategoryOptions] = useState<string[]>([]);
+	const [categoryOptions, setCategoryOptions] = useState<any>([]);
 
 	const httpInterface = useNetwork((state) => state.httpInterface);
 
