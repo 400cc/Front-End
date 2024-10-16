@@ -64,8 +64,8 @@ const ClusteringChart = React.memo(function ClusteringChart({ data, isLoading, i
 								</div>
 								<strong>상품 이름:</strong> ${DetailData?.styleName} <br/>
 								<strong>브랜드:</strong> ${DetailData?.brand || '브랜드 정보 없음'} <br/>
-								<strong>고정가:</strong> ${DetailData?.fixedPrice || '고정가 정보 없음'} <br/>
-								<strong>할인가:</strong> ${DetailData?.discountedPrice || '할인가 정보 없음'} <br/>
+								<strong>고정가:</strong> ${DetailData?.fixedPrice.toLocaleString() || '고정가 정보 없음'}원 <br/>
+								<strong>할인가:</strong> ${DetailData?.discountedPrice.toLocaleString() || '할인가 정보 없음'}원 <br/>
 							</div>
 						`;
 						},
@@ -130,6 +130,7 @@ const ClusteringChart = React.memo(function ClusteringChart({ data, isLoading, i
 					dataPointMouseEnter: function (event, chartContext, config) {
 						const data = config.w.config.series[config.seriesIndex].data[config.dataPointIndex];
 						handleHoverDebounced(data.mallTypeId, data.styleId);
+						event.target.style.cursor = 'pointer';
 					},
 					dataPointMouseLeave: function () {
 						setHoveredStyleId(null);
@@ -154,6 +155,7 @@ const ClusteringChart = React.memo(function ClusteringChart({ data, isLoading, i
 						</div>
 					`;
 				},
+				offsetY: 10,
 			},
 			xaxis: {
 				tickAmount: 10,
