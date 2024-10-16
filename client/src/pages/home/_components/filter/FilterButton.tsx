@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { MALL_TYPE_ID } from '@/constants/mallTypeId';
+import { CategoryType } from '@/pages/styles/_types/sidebarFilter.type';
 
 interface FilterButtonProps {
 	filterName: string;
@@ -9,7 +10,7 @@ interface FilterButtonProps {
 	applyFilter: (filterKey: string, value: string) => void;
 	options: any[];
 	isMultiSelect: boolean;
-	selectedFilters: { [key: string]: string | string[] | null };
+	selectedFilters: { [key: string]: string | CategoryType[] | null };
 }
 
 const FilterButton: React.FC<FilterButtonProps> = ({
@@ -50,8 +51,8 @@ const FilterButton: React.FC<FilterButtonProps> = ({
 						<div className="flex items-center">
 							<input
 								type="checkbox"
-								checked={((selectedFilter as string[]) ?? []).includes(category.categoryId.toString())}
-								onChange={() => handleCategoryChange(category)}
+								checked={((selectedFilter as any[]) ?? []).some((cat) => cat.categoryId === category.categoryId)}
+								onChange={() => handleCategoryChange(category)} // 전체 category 객체 전달
 							/>
 							<span className="ml-2 cursor-pointer" onClick={() => toggleCategory(category.categoryId)}>
 								{category.name}
@@ -73,6 +74,10 @@ const FilterButton: React.FC<FilterButtonProps> = ({
 
 	const displayText = () => {
 		if (isMultiSelect && Array.isArray(selectedFilter) && selectedFilter.length > 0) {
+			// 카테고리의 경우 name 필드를 보여줌
+			if (filterKey === 'category') {
+				return selectedFilter.map((cat: any) => cat.name).join(', ');
+			}
 			return selectedFilter.join(', ');
 		}
 		if (!isMultiSelect && selectedFilter) {

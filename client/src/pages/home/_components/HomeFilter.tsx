@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react';
+import useNetwork from '@/stores/networkStore';
+import { MALL_TYPE_ID } from '@/constants/mallTypeId';
+import { CategoryType } from '@/pages/styles/_types/sidebarFilter.type';
+
 import Card from '@/components/Card';
 import FilterButton from '@/pages/home/_components/filter/FilterButton';
-import { MALL_TYPE_ID } from '@/constants/mallTypeId';
+
 import { useSetSearchParams } from '@/pages/home/_hooks/useSetSearchParams';
-import useNetwork from '@/stores/networkStore';
-import '@/styles/custom.css';
 import { useSyncQueryParams } from '../_hooks/useSyncQueryParams';
+import '@/styles/custom.css';
 
 interface SelectedFilters {
-	mallTypeId: string | null;
-	category: string[];
-	startDate: string | null;
-	endDate: string | null;
-	[key: string]: string | string[] | null;
+	mallTypeId: string;
+	category: CategoryType[];
+	startDate: string;
+	endDate: string;
+	[key: string]: string | CategoryType[] | null;
 }
 
 export default function HomeFilter() {
@@ -34,11 +37,12 @@ export default function HomeFilter() {
 		setActiveFilter((prev) => (prev === filterName ? null : filterName));
 	};
 
-	const applyFilter = (filterKey: string, value: string) => {
+	const applyFilter = (filterKey: string, value: any) => {
 		if (filterKey === 'category') {
 			setSelectedFilters((prev) => {
-				const newCategories = (prev.category ?? []).includes(value)
-					? (prev.category as string[]).filter((category) => category !== value)
+				const isSelected = (prev.category ?? []).some((category: any) => category.categoryId === value.categoryId);
+				const newCategories = isSelected
+					? (prev.category as any[]).filter((category) => category.categoryId !== value.categoryId)
 					: [...(prev.category ?? []), value];
 				return { ...prev, category: newCategories };
 			});
@@ -50,16 +54,16 @@ export default function HomeFilter() {
 		setActiveFilter(null); // Close the dropdown after applying filter
 	};
 
-	const removeFilter = (filterKey: string, value?: string) => {
-		if (filterKey === 'category' && value) {
-			setSelectedFilters((prev) => ({
-				...prev,
-				category: (prev.category ?? []).filter((category) => category !== value),
-			}));
-		} else {
-			setSelectedFilters((prev) => ({ ...prev, [filterKey]: null }));
-		}
-	};
+	// const removeFilter = (filterKey: string, value?: string) => {
+	// 	if (filterKey === 'category' && value) {
+	// 		setSelectedFilters((prev) => ({
+	// 			...prev,
+	// 			category: (prev.category ?? []).filter((category) => category !== value),
+	// 		}));
+	// 	} else {
+	// 		setSelectedFilters((prev) => ({ ...prev, [filterKey]: null }));
+	// 	}
+	// };
 
 	useEffect(() => {
 		if (!selectedFilters.mallTypeId) return;
