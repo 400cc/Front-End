@@ -44,6 +44,8 @@ const FilterButton: React.FC<FilterButtonProps> = ({
 	};
 
 	const renderCategories = (categories: any[]) => {
+		console.log(categories);
+
 		return (
 			<ul className="pl-4">
 				{categories.map((category) => (
@@ -51,7 +53,7 @@ const FilterButton: React.FC<FilterButtonProps> = ({
 						<div className="flex items-center">
 							<input
 								type="checkbox"
-								checked={((selectedFilter as any[]) ?? []).some((cat) => cat.categoryId === category.categoryId)}
+								checked={(selectedFilter as any[]).some((cat) => cat.categoryId === category.categoryId)}
 								onChange={() => handleCategoryChange(category)} // 전체 category 객체 전달
 							/>
 							<span className="ml-2 cursor-pointer" onClick={() => toggleCategory(category.categoryId)}>
@@ -76,7 +78,8 @@ const FilterButton: React.FC<FilterButtonProps> = ({
 		if (isMultiSelect && Array.isArray(selectedFilter) && selectedFilter.length > 0) {
 			// 카테고리의 경우 name 필드를 보여줌
 			if (filterKey === 'category') {
-				return selectedFilter.map((cat: any) => cat.name).join(', ');
+				// return selectedFilter.map((cat: any) => cat.name).join(', ');
+				return selectedFilter.map((cat: any) => cat.categoryId).join(', ');
 			}
 			return selectedFilter.join(', ');
 		}

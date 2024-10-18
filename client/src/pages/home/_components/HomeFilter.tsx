@@ -41,9 +41,11 @@ export default function HomeFilter() {
 		if (filterKey === 'category') {
 			setSelectedFilters((prev) => {
 				const isSelected = (prev.category ?? []).some((category: any) => category.categoryId === value.categoryId);
+
 				const newCategories = isSelected
 					? (prev.category as any[]).filter((category) => category.categoryId !== value.categoryId)
 					: [...(prev.category ?? []), value];
+
 				return { ...prev, category: newCategories };
 			});
 		} else if (filterKey === 'mallTypeId') {
@@ -51,7 +53,7 @@ export default function HomeFilter() {
 		} else {
 			setSelectedFilters((prev) => ({ ...prev, [filterKey]: value }));
 		}
-		setActiveFilter(null); // Close the dropdown after applying filter
+		setActiveFilter(null);
 	};
 
 	// const removeFilter = (filterKey: string, value?: string) => {
