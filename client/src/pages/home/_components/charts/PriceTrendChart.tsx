@@ -71,7 +71,6 @@ export default function PriceTrendChart({ data }: PriceTrendChartProps) {
 			},
 		},
 		yaxis: {
-			logarithmic: true,
 			labels: {
 				style: {
 					colors: '#6B7280',
