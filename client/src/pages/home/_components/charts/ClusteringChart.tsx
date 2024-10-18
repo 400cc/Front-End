@@ -119,9 +119,11 @@ const ClusteringChart = React.memo(function ClusteringChart({ data, isLoading, i
 				height: 350,
 				type: 'scatter' as const,
 				zoom: {
-					enabled: true,
-					type: 'xy' as const,
+					enabled: false,
 				},
+				// toolbar: {
+				// 	show: false,
+				// },
 				events: {
 					dataPointSelection: function (event, chartContext, config) {
 						const data = config.w.config.series[config.seriesIndex].data[config.dataPointIndex];
@@ -158,6 +160,8 @@ const ClusteringChart = React.memo(function ClusteringChart({ data, isLoading, i
 				offsetY: 10,
 			},
 			xaxis: {
+				min: 0,
+				max: 1,
 				tickAmount: 10,
 				labels: {
 					formatter: function (val) {
@@ -166,7 +170,14 @@ const ClusteringChart = React.memo(function ClusteringChart({ data, isLoading, i
 				},
 			},
 			yaxis: {
-				tickAmount: 7,
+				min: 0,
+				max: 1,
+				tickAmount: 10,
+				labels: {
+					formatter: function (val) {
+						return parseFloat(val).toFixed(1);
+					},
+				},
 			},
 		};
 	}, []);
