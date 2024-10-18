@@ -119,7 +119,8 @@ const ClusteringChart = React.memo(function ClusteringChart({ data, isLoading, i
 				height: 350,
 				type: 'scatter' as const,
 				zoom: {
-					enabled: false,
+					enabled: true,
+					type: 'xy' as const,
 				},
 				// toolbar: {
 				// 	show: false,
@@ -157,7 +158,7 @@ const ClusteringChart = React.memo(function ClusteringChart({ data, isLoading, i
 						</div>
 					`;
 				},
-				offsetY: 10,
+				offsetY: 20,
 			},
 			xaxis: {
 				min: 0,
