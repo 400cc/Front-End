@@ -61,7 +61,7 @@ export default function PriceTrendChart({ data }: PriceTrendChartProps) {
 					fontSize: '14px',
 					fontWeight: 500,
 				},
-				formatter: (value: string) => value + ' 원',
+				formatter: (value: string) => value,
 			},
 			axisBorder: {
 				color: '#F3F4F6',

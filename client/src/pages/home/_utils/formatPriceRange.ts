@@ -4,8 +4,8 @@ export const formatPriceRange = (range: string) => {
 
 	// max 값이 없는 경우(즉, 10000000+)
 	if (!max) {
-		return `${min}원 +`; // min 값 뒤에 '원 +' 붙여서 출력
+		return `${min} 원 +`; // min 값 뒤에 '원 +' 붙여서 출력
 	}
 
-	return `${min}~${max}원`;
+	return `${min}~${max} 원`;
 };
