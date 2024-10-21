@@ -119,7 +119,7 @@ const ClusteringChart = React.memo(function ClusteringChart({ data, isLoading, i
 				height: 350,
 				type: 'scatter' as const,
 				zoom: {
-					enabled: true,
+					enabled: false,
 				},
 				toolbar: {
 					show: false,
