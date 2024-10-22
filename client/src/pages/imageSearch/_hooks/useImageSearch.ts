@@ -27,10 +27,6 @@ export const useImageSearch = () => {
 
 	const handleSubmit = () => {
 		if (formData) {
-			window.scrollTo({
-				top: 800,
-				behavior: 'smooth',
-			});
 			setShouldFetch(true);
 		} else {
 			alert('이미지를 업로드 해주세요');

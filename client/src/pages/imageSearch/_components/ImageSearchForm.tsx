@@ -1,10 +1,11 @@
+import { useEffect } from 'react';
 import Card from '@/components/Card';
-import { useImageSearch } from '@/pages/imageSearch/_hooks/useImageSearch';
 import ImageUpload from './ImageUpload';
 import ImageFilters from '@/pages/imageSearch/_components/ImageFilters';
 import ImageSearchResults from '@/pages/imageSearch/_components/ImageSearchResults';
 import ErrorComponent from '@/components/ErrorComponent';
 import ImageSearchResultsSkeleton from '@/components/skeleton/ImageSearchResultSkeleton';
+import { useImageSearch } from '@/pages/imageSearch/_hooks/useImageSearch';
 
 export default function ImageSearchForm() {
 	const {
@@ -22,6 +23,15 @@ export default function ImageSearchForm() {
 		handleSubmit,
 		handleReset,
 	} = useImageSearch();
+
+	useEffect(() => {
+		if (isLoading) {
+			window.scrollTo({
+				top: 800,
+				behavior: 'smooth',
+			});
+		}
+	}, [isLoading]);
 
 	return (
 		<>
